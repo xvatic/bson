@@ -1,18 +1,30 @@
 package sample;
 
 public class Shooter extends Games {
+    public double releaseDate;
+    public String name;
+    public String[] genre;
+
+
+
     @Override
     public double getReleaseDate() {
-        return 0;
+        return releaseDate;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String[] getGenre() {
-        return new String[0];
+        return genre;
+    }
+
+    public Shooter(double releaseDate, String name, String[] genre){
+        this.releaseDate = releaseDate;
+        this.name = name;
+        this.genre = genre;
     }
 }
