@@ -1,30 +1,43 @@
 package sample;
 
+import java.util.Objects;
+
 public class Shooter extends Games {
-    public double releaseDate;
-    public String name;
-    public String[] genre;
 
+    private String name;
 
-
-    @Override
-    public double getReleaseDate() {
-        return releaseDate;
+    public Shooter(int id, String name) {
+        super(id);
+        this.name = name;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
-    public String[] getGenre() {
-        return genre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Shooter(double releaseDate, String name, String[] genre){
-        this.releaseDate = releaseDate;
-        this.name = name;
-        this.genre = genre;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shooter shooter = (Shooter) o;
+        return name == shooter.name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Shooter{" +
+                "name=" + name +
+                "id=" + super.getId() +
+                '}';
     }
 }
+

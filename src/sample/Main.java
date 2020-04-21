@@ -10,6 +10,12 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import org.bson.*;
 import java.io.*;
+import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 import org.bson.BsonDocument;
 import org.bson.codecs.RawBsonDocumentCodec;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,68 +31,18 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 700, 600));
         primaryStage.show();
     }
-
-
-
-
-
-
-    public static byte[] Serialization(String json) {
-        RawBsonDocument rawBsonDoc = RawBsonDocument.parse(json);
-        ByteBuf b = rawBsonDoc.getByteBuffer();
-        return b.array();
-    }
-    public static String Deserialization(byte[] arr) {
-        RawBsonDocument rawdo = new RawBsonDocument(arr);
-        return rawdo.toJson();
-    }
-
-    public static void Serialize() {
-        String filename = "file.ser";
-        if(true){
-            try{
-                FileOutputStream file = new FileOutputStream(filename);
-                Shooter shooter = new Shooter(2017, "PUBG", new String[]{"FPS", "PC,PS4,XBOX"});
-                ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-                String json = ow.writeValueAsString(shooter);
-                RawBsonDocument raw = RawBsonDocument.parse(json);
-                ByteBuf b = raw.getByteBuffer();
-                b.array();
-                file.write(b.array());
-                file.close();
-                System.out.println("Serialized");
-            }
-            catch (IOException ex) {
-                System.out.println("IOException is caught");
-            }
-        }
-    }
-
-    public static void Deserialize() {
-        String filename = "file.ser";
-        try {
-            if(true){
-                FileInputStream file = new FileInputStream(filename);
-                byte[] x = new byte[1000];
-                file.read(x);
-                file.close();
-                RawBsonDocument rawdo = new RawBsonDocument(x);
-                System.out.println("Deserialized");
-                System.out.println(rawdo.toString());
-            }
-        }
-        catch (IOException ex){
-            System.out.println("IOException is caught");
-        }
-
-    }
-
+    private static Scanner scanner = new Scanner(System.in);
+    private static AutoIncrement autoIncrement = new AutoIncrement();
+    private static Service service = new Service();
 
     public static void main(String[] args) {
-        Serialize();
-        Deserialize();
-        launch(args);
 
+        System.out.println("Enter name:");
+        String name = scanner.nextLine();
+        if(service.setShooter(new Shooter(autoIncrement.autoIncrement(), name))){
+            System.out.println("Success");
+        }
+        launch(args);
     }
 
 

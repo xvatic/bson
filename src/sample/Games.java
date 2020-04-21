@@ -1,7 +1,9 @@
 package sample;
 
-public abstract class Games {
-    public abstract double getReleaseDate();
-    public abstract String getName();
-    public abstract String[] getGenre();
+public class Games {
+    private int id;
+    public Games(int id){this.id = id;}
+    public void setId(int id){this.id = id;}
+    public int getId(){return id;}
+
 }
