@@ -1,2 +1,4 @@
 
-{"Game": "Shooter", "Name": "APEX", "id": 0}
+{"Games": "Shooter", "name": "CallOfDuty", "id": 2}
+{"Games": "Racing", "name": "GranTurismo", "carsAmount": 120, "id": 0}
+{"Games": "Stealth", "name": "Hitman", "hero": "Bald", "id": 4}

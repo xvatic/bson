@@ -14,6 +14,7 @@ public class DSTools {
         stream.writeObject(doc);
     }
 
+
     public List<Document> getAll(){
         List<Document> games = new ArrayList<>();
         Scanner sc = null;
@@ -132,7 +133,7 @@ public class DSTools {
                 if (!line.isEmpty()) {
                     Document doc = Document.parse(line);
 
-                    if (doc.get("Shape").equals("Square")) {
+                    if (doc.get("Games").equals("Shooter")) {
                         Shooter shooter = new Shooter((int) doc.get("id"), (String) doc.get("name"));
                         shooters.add(shooter);
                     }
@@ -150,11 +151,10 @@ public class DSTools {
         try(FileWriter writer = new FileWriter("games", true)) {
             Document doc = new Document();
 
-            doc.append("Game", "Shooter");
-            doc.append("Name", shooter.getName());
+            doc.append("Games", "Shooter");
+            doc.append("name", shooter.getName());
             doc.append("id", shooter.getId());
 
-            //Shows that serialization really works
             writeBinaryForm(doc);
             doc = getLatestAddedGame();
 
@@ -169,5 +169,204 @@ public class DSTools {
 
         return true;
     }
+    public List<Racing> getRacings() {
+        List<Racing> racings = new ArrayList<>();
+
+        File file = new File("games");
+        try(Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    Document doc = Document.parse(line);
+
+                    if (doc.get("Games").equals("Racing")) {
+                        Racing racing = new Racing((int) doc.get("id"), (String) doc.get("name"),
+                                (int) doc.get("carsAmount"));
+                        racings.add(racing);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return racings;
+    }
+
+
+    public boolean setRacing(Racing racing) {
+        try(FileWriter writer = new FileWriter("games", true)) {
+            Document doc = new Document();
+
+            doc.append("Games", "Racing");
+            doc.append("name", racing.getName());
+            doc.append("carsAmount", racing.getCarsAmount());
+            doc.append("id", racing.getId());
+
+
+            writeBinaryForm(doc);
+            doc = getLatestAddedGame();
+
+            writer.write("\n" + doc.toJson());
+
+            writeBinaryForm(doc);
+
+            writer.flush();
+        } catch(IOException ex){
+            return false;
+        }
+        return true;
+    }
+
+    public List<Indie> getIndies() {
+        List<Indie> indies = new ArrayList<>();
+
+        File file = new File("games");
+        try(Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    Document doc = Document.parse(line);
+
+                    if (doc.get("Games").equals("Indie")) {
+                        Indie indie = new Indie((int) doc.get("id"), (String) doc.get("name"),
+                                (String) doc.get("level"));
+                        indies.add(indie);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return indies;
+    }
+
+
+    public boolean setIndies(Indie indie) {
+        try(FileWriter writer = new FileWriter("games", true)) {
+            Document doc = new Document();
+
+            doc.append("Games", "Indie");
+            doc.append("name", indie.getName());
+            doc.append("level", indie.getLevel());
+            doc.append("id", indie.getId());
+
+
+            writeBinaryForm(doc);
+            doc = getLatestAddedGame();
+
+            writer.write("\n" + doc.toJson());
+
+            writeBinaryForm(doc);
+
+            writer.flush();
+        } catch(IOException ex){
+            return false;
+        }
+        return true;
+    }
+
+    public List<Stealth> getStealthes() {
+        List<Stealth> stealthes = new ArrayList<>();
+
+        File file = new File("games");
+        try(Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    Document doc = Document.parse(line);
+
+                    if (doc.get("Games").equals("Stealth")) {
+                        Stealth stealth = new Stealth((int) doc.get("id"), (String) doc.get("name"),
+                                (String) doc.get("hero"));
+                        stealthes.add(stealth);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return stealthes;
+    }
+
+
+    public boolean setStealthes(Stealth stealth) {
+        try(FileWriter writer = new FileWriter("games", true)) {
+            Document doc = new Document();
+
+            doc.append("Games", "Stealth");
+            doc.append("name", stealth.getName());
+            doc.append("hero", stealth.getHero());
+            doc.append("id", stealth.getId());
+
+
+            writeBinaryForm(doc);
+            doc = getLatestAddedGame();
+
+            writer.write("\n" + doc.toJson());
+
+            writeBinaryForm(doc);
+
+            writer.flush();
+        } catch(IOException ex){
+            return false;
+        }
+        return true;
+    }
+    public List<Fighting> getFightings() {
+        List<Fighting> fightings = new ArrayList<>();
+
+        File file = new File("games");
+        try(Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    Document doc = Document.parse(line);
+
+                    if (doc.get("Games").equals("Fighting")) {
+                        Fighting fighting = new Fighting((int) doc.get("id"), (String) doc.get("name"),
+                                (int) doc.get("prizePool"));
+                        fightings.add(fighting);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return fightings;
+    }
+
+
+    public boolean setFightings(Fighting fighting) {
+        try(FileWriter writer = new FileWriter("games", true)) {
+            Document doc = new Document();
+
+            doc.append("Games", "Fighting");
+            doc.append("name", fighting.getName());
+            doc.append("prizePool", fighting.getPrizePool());
+            doc.append("id", fighting.getId());
+
+
+            writeBinaryForm(doc);
+            doc = getLatestAddedGame();
+
+            writer.write("\n" + doc.toJson());
+
+            writeBinaryForm(doc);
+
+            writer.flush();
+        } catch(IOException ex){
+            return false;
+        }
+        return true;
+    }
+
 
 }

@@ -37,11 +37,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter name:");
-        String name = scanner.nextLine();
-        if(service.setShooter(new Shooter(autoIncrement.autoIncrement(), name))){
-            System.out.println("Success");
-        }
+
         launch(args);
     }
 
