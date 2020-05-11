@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.LoadingEngine;
 
+
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +28,7 @@ public class Controller {
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
     private static Service service = new Service();
+    final FileChooser fileChooser = new FileChooser();
 
 
     ObservableList<String> types = FXCollections.observableArrayList("Shooter","Indie","Racing", "Fighting", "Stealth");
@@ -61,6 +66,8 @@ public class Controller {
     public Button ChangeButton;
     @FXML
     public Button SwitchButton;
+    @FXML
+    public Button LoadButton;
 
     public void work(){
         ReadyButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -161,6 +168,29 @@ public class Controller {
 
             }
         });
+        LoadButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) SwitchButton.getScene().getWindow();
+                stage.close();
+                Parent root1 = null;
+                try {
+                    root1 = FXMLLoader.load(getClass().getResource("additionalform.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Additional");
+                stage.setScene(new Scene(root1));
+                stage.show();
+
+
+
+
+            }
+        });
+
     }
 
 

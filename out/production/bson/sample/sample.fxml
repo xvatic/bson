@@ -12,5 +12,6 @@
       <Button fx:id="DeleteButton" layoutX="517.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" text="Indie" />
       <ComboBox fx:id="TypeComboBox" layoutX="411.0" layoutY="212.0" prefWidth="150.0" />
       <Button fx:id="SwitchButton" layoutX="78.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Racing" />
+      <Button fx:id="LoadButton" layoutX="118.0" layoutY="309.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Load" />
    </children>
 </AnchorPane>

@@ -1,7 +1,7 @@
 package sample;
 
-public class Engine {
-    public Class start(String modulePath,String moduleFullName) {
+public class LoadingEngine {
+    public static Class start(String modulePath, String moduleFullName) {
 
 
         ModuleLoader loader = new ModuleLoader(modulePath, ClassLoader.getSystemClassLoader());
