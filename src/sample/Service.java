@@ -228,6 +228,39 @@ public class Service {
         return ser.deleteGame(obj);
     }
 
+    public void changeAdditional(Games obj, int id, String name, Object parameter) throws IllegalAccessException {
+        DSTools ser = new DSTools();
+        Collections.addAll(types, obj);
+        deleteAdditional(obj, id);
+        obj.setId(id);
+        Field[] fields = obj.getClass().getDeclaredFields();
+        int i=1;
+        for(Field field: fields){
+            java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+
+
+            if (annotation == null){
+                continue;
+            }
+
+            field.setAccessible(true);
+            field.getType();
+            if (i==1){
+                field.set(obj, name);
+                i+=1;
+                field.setAccessible(false);
+                continue;
+            }
+            field.set(obj, parameter);
+            field.setAccessible(false);
+
+        }
+        ser.setAdditional(obj);
+
+    }
+
+
+
     public void addNewClass(Games obj, String name, Object parameter) throws IllegalAccessException {
         DSTools ser = new DSTools();
         Collections.addAll(types, obj);

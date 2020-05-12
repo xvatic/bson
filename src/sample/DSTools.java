@@ -386,31 +386,35 @@ public class DSTools {
                     Document doc = Document.parse(line);
 
                     if (doc.get("Games").equals(addClass.getName())) {
+                        Object addObj = addClass.newInstance();
+
                         /*Fighting fighting = new Fighting((int) doc.get("id"), (String) doc.get("name"),
                                 (int) doc.get("prizePool"));*/
-                       obj.setId((int) doc.get("id"));
+                       ((Games) addObj).setId((int) doc.get("id"));
                        int i = 1;
-                       for(Field field: fields){
-                            java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
-                            if (annotation == null){
-                                continue;
-                            }
+                       for(Field field: fields) {
+                           java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+                           if (annotation == null) {
+                               continue;
+                           }
 
-                            field.setAccessible(true);
-                            if (i==1) {
-                                field.set(obj, (Object) doc.get(("name")));
-                                i += 1;
-                                field.setAccessible(false);
-                                continue;
-                            }
-                            field.set(obj, (Object) doc.get("additional"));
+                           field.setAccessible(true);
+                           if (i == 1) {
+                               field.set(addObj, (Object) doc.get(("name")));
+                               i += 1;
+                               field.setAccessible(false);
+                               continue;
+                           }
+                           field.set(addObj, (Object) doc.get("additional"));
 
 
-                            field.setAccessible(false);
+                           field.setAccessible(false);
 
-                        }
-                        additional.add(obj);
+                       }
+
+                        additional.add((Games) addObj);
                     }
+
                 }
             }
         } catch (Exception e) {

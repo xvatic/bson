@@ -4,8 +4,8 @@
 {"Games": "Shooter", "name": "Apex Legends", "id": 1}
 {"Games": "Fighting", "name": "Mortal Combat", "prizePool": 1000, "id": 5}
 {"Games": "Racing", "name": "Forza Motorsport", "carsAmount": 200, "id": 0}
-{"Games": "Indie", "name": "Isaac", "level": "Hardcore", "id": 7}
 {"Games": "Indie", "name": "Undertale APEX", "level": "Easy", "id": 6}
 {"Games": "Racing", "name": "GT 5", "carsAmount": 50, "id": 8}
-{"Games": "MOBA", "name": "dota", "additional": 120, "id": 9}
+{"Games": "Indie", "name": "Binding Of Isaac", "level": "", "id": 7}
 {"Games": "MOBA", "name": "Lol", "additional": 200, "id": 10}
+{"Games": "MOBA", "name": "DotaAllStars", "additional": 150, "id": 9}

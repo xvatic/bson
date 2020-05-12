@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -106,6 +107,35 @@ public class AdditionalController {
                             else{
                                 service.addNewClass(((Games)newObject), NameSpace.getText(),Integer.parseInt(ParameterSpace.getText()));
                             }
+
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(BtnGroup.getSelectedToggle() == ChangeButton){
+                        try {
+                            newObject = additionalClass.newInstance();
+                            int a = 0;
+                            a = Integer.parseInt(ParameterSpace.getText());
+                            if (a != 0){
+                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a);
+                            }
+                            else{
+                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(),Integer.parseInt(ParameterSpace.getText()));
+                            }
+
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(BtnGroup.getSelectedToggle() == DeleteButton){
+                        try {
+                            newObject = additionalClass.newInstance();
+                            service.deleteAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()));
 
                         } catch (InstantiationException e) {
                             e.printStackTrace();
