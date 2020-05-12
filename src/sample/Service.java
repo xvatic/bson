@@ -1,10 +1,20 @@
 package sample;
 
+import com.sun.tools.classfile.ConstantPool;
 import org.bson.Document;
 
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+
 public class Service {
+    private static List<Games> types = new ArrayList<Games>();
     public Document getLatestAddedShape(){
         DSTools ser = new DSTools();
         return ser.getLatestAddedGame();
@@ -206,6 +216,47 @@ public class Service {
 
         return ser.setFightings(fighting);
     }
+
+    public List<Games> getAdditional(Games obj){
+        DSTools ser = new DSTools();
+        return ser.getAdditional(obj);
+    }
+
+    public boolean deleteAdditional(Games obj,int id){
+        DSTools ser = new DSTools();
+        obj.setId(id);
+        return ser.deleteGame(obj);
+    }
+
+    public void addNewClass(Games obj, String name, Object parameter) throws IllegalAccessException {
+        DSTools ser = new DSTools();
+        Collections.addAll(types, obj);
+        Field[] fields = obj.getClass().getDeclaredFields();
+        int i=1;
+        for(Field field: fields){
+            java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+
+
+            if (annotation == null){
+                continue;
+            }
+
+            field.setAccessible(true);
+            field.getType();
+            if (i==1){
+                field.set(obj, name);
+                i+=1;
+                field.setAccessible(false);
+                continue;
+            }
+            field.set(obj, parameter);
+            field.setAccessible(false);
+
+        }
+        ser.setAdditional(obj);
+
+    }
+
 
 
 }

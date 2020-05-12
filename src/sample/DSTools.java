@@ -3,6 +3,7 @@ package sample;
 import org.bson.Document;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -363,6 +364,104 @@ public class DSTools {
 
             writer.flush();
         } catch(IOException ex){
+            return false;
+        }
+        return true;
+    }
+
+
+
+    public List<Games> getAdditional(Games obj) {
+        Class addClass = obj.getClass();
+        Field[] fields = obj.getClass().getDeclaredFields();
+        List<Games> additional = new ArrayList<>();
+
+
+        File file = new File("games");
+        try(Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    Document doc = Document.parse(line);
+
+                    if (doc.get("Games").equals(addClass.getName())) {
+                        /*Fighting fighting = new Fighting((int) doc.get("id"), (String) doc.get("name"),
+                                (int) doc.get("prizePool"));*/
+                       obj.setId((int) doc.get("id"));
+                       int i = 1;
+                       for(Field field: fields){
+                            java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+                            if (annotation == null){
+                                continue;
+                            }
+
+                            field.setAccessible(true);
+                            if (i==1) {
+                                field.set(obj, (Object) doc.get(("name")));
+                                i += 1;
+                                field.setAccessible(false);
+                                continue;
+                            }
+                            field.set(obj, (Object) doc.get("additional"));
+
+
+                            field.setAccessible(false);
+
+                        }
+                        additional.add(obj);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return additional;
+    }
+
+    public boolean setAdditional(Games obj) {
+        Object addVal1 = null;
+        Object addVal2 = null;
+        try(FileWriter writer = new FileWriter("games", true)) {
+            Document doc = new Document();
+            Field[] fields = obj.getClass().getDeclaredFields();
+            int i=1;
+            for(Field field: fields){
+                java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+                if (annotation == null){
+                    continue;
+                }
+
+                field.setAccessible(true);
+                if (i==1) {
+                    addVal1 = field.get(obj);
+                    i += 1;
+                    field.setAccessible(false);
+                    continue;
+                }
+                addVal2 = field.get(obj);
+
+                field.setAccessible(false);
+
+            }
+
+
+            doc.append("Games", obj.getClass().getName());
+            doc.append("name", addVal1);
+            doc.append("additional", addVal2);
+            doc.append("id", obj.getId());
+
+
+            writeBinaryForm(doc);
+            doc = getLatestAddedGame();
+
+            writer.write("\n" + doc.toJson());
+
+            writeBinaryForm(doc);
+
+            writer.flush();
+        } catch(IOException | IllegalAccessException ex){
             return false;
         }
         return true;

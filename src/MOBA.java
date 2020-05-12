@@ -1,15 +1,24 @@
+import sample.AutoIncrement;
+import sample.ExternalAnnotation;
 import sample.Games;
 
 import java.util.Objects;
 
 public class MOBA extends Games {
+    private static AutoIncrement autoIncrement = new AutoIncrement();
+    @Deprecated
     private String name;
+    @Deprecated
     private int heroes;
 
     public MOBA(int id, String name, int heroes) {
         super(id);
         this.name = name;
         this.heroes = heroes;
+    }
+    public MOBA(){
+        super(autoIncrement.autoIncrement());
+
     }
 
     public String getName() {
@@ -27,6 +36,7 @@ public class MOBA extends Games {
     public void setHeroes(int heroes) {
         this.heroes = heroes;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -50,4 +60,5 @@ public class MOBA extends Games {
                 ", id=" + super.getId() +
                 '}';
     }
+
 }

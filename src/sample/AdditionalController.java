@@ -8,16 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +28,7 @@ public class AdditionalController {
     final FileChooser fileChooser = new FileChooser();
 
     @FXML
-    public Button ReadyButton;
+    public RadioButton ReadyButton;
 
 
     @FXML
@@ -51,41 +49,23 @@ public class AdditionalController {
     public Label ParameterLabel;
 
     @FXML
-    public Button AddButton;
+    public RadioButton AddButton;
     @FXML
     public Button LoadButton;
 
     @FXML
-    public Button DeleteButton;
+    public RadioButton DeleteButton;
 
     @FXML
-    public Button ChangeButton;
+    public RadioButton ChangeButton;
 
     @FXML
     public Button SwitchButton;
 
+    @FXML
+    public ToggleGroup BtnGroup;
+
     public void work(){
-        ReadyButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ObjectComboBox.valueProperty().set(null);
-                ObservableList<String> indies1 = FXCollections.observableArrayList();
-                List<Indie> indies = service.getIndie();
-                for (Indie indie : indies){
-                    indies1.add(indie.getName());
-                }
-                ObjectComboBox.setItems(indies1);
-
-            }
-        });
-
-        AddButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Boolean result = service.setIndie(new Indie(autoIncrement.autoIncrement(), NameSpace.getText(),ParameterSpace.getText()));
-                System.out.println(result);
-            }
-        });
 
         SwitchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -106,22 +86,7 @@ public class AdditionalController {
             }
         });
 
-        DeleteButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Boolean result = service.delete(new Stealth(Integer.parseInt(IdSpace.getText()), NameSpace.getText(),ParameterSpace.getText() ));
-                System.out.println(result);
-            }
-        });
 
-        ChangeButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Boolean result = service.changeIndie(new Indie(Integer.parseInt(IdSpace.getText()), NameSpace.getText(),ParameterSpace.getText()));
-                System.out.println(result);
-
-            }
-        });
         LoadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -130,6 +95,65 @@ public class AdditionalController {
                     String path = file.getPath();
                     Class additionalClass = LoadingEngine.start(path, file.getName());
                     Object newObject = null;
+                    if(BtnGroup.getSelectedToggle() == AddButton){
+                        try {
+                            newObject = additionalClass.newInstance();
+                            int a = 0;
+                            a = Integer.parseInt(ParameterSpace.getText());
+                            if (a != 0){
+                                service.addNewClass(((Games)newObject), NameSpace.getText(), a);
+                            }
+                            else{
+                                service.addNewClass(((Games)newObject), NameSpace.getText(),Integer.parseInt(ParameterSpace.getText()));
+                            }
+
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(BtnGroup.getSelectedToggle() == ReadyButton){
+
+                        ObjectComboBox.valueProperty().set(null);
+                        ObservableList<String> additional = FXCollections.observableArrayList();
+                        try {
+                            newObject = additionalClass.newInstance();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                        List<Games> games = service.getAdditional(((Games)newObject));
+                        for (Games game : games){
+                            Field[] fields = game.getClass().getDeclaredFields();
+                            int i=1;
+                            for(Field field: fields){
+                                java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
+
+
+                                if (annotation == null){
+                                    continue;
+                                }
+
+                                field.setAccessible(true);
+                                field.getType();
+                                if (i==1){
+                                    try {
+                                        additional.add((String) field.get(game));
+                                    } catch (IllegalAccessException e) {
+                                        e.printStackTrace();
+                                    }
+                                    field.setAccessible(false);
+                                    break;
+                                }
+
+
+                            }
+                        }
+                        ObjectComboBox.setItems(additional);
+                    }
+
 
                 }
 

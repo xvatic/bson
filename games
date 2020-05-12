@@ -7,3 +7,5 @@
 {"Games": "Indie", "name": "Isaac", "level": "Hardcore", "id": 7}
 {"Games": "Indie", "name": "Undertale APEX", "level": "Easy", "id": 6}
 {"Games": "Racing", "name": "GT 5", "carsAmount": 50, "id": 8}
+{"Games": "MOBA", "name": "dota", "additional": 120, "id": 9}
+{"Games": "MOBA", "name": "Lol", "additional": 200, "id": 10}
