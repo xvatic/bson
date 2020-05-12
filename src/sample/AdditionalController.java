@@ -122,12 +122,16 @@ public class AdditionalController {
                         try {
                             newObject = additionalClass.newInstance();
                             int a = 0;
-                            a = Integer.parseInt(ParameterSpace.getText());
+                            try{
+                                a = Integer.parseInt(ParameterSpace.getText());
+                            } catch (NumberFormatException ignore) {
+
+                            }
                             if (a != 0){
                                 service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a);
                             }
                             else{
-                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(),Integer.parseInt(ParameterSpace.getText()));
+                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(),ParameterSpace.getText());
                             }
 
                         } catch (InstantiationException e) {
