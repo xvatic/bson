@@ -9,3 +9,4 @@
 {"Games": "Indie", "name": "Binding Of Isaac", "level": "", "id": 7}
 {"Games": "MOBA", "name": "Lol", "additional": 200, "id": 10}
 {"Games": "MOBA", "name": "DotaAllStars", "additional": 150, "id": 9}
+{"Games": "BattleRoyale", "name": "Apex", "additional": "Twitch", "id": 11}

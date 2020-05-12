@@ -100,12 +100,16 @@ public class AdditionalController {
                         try {
                             newObject = additionalClass.newInstance();
                             int a = 0;
-                            a = Integer.parseInt(ParameterSpace.getText());
+                             try {
+                                 a = Integer.parseInt(ParameterSpace.getText());
+                             } catch (NumberFormatException ignore) {
+
+                             }
                             if (a != 0){
                                 service.addNewClass(((Games)newObject), NameSpace.getText(), a);
                             }
                             else{
-                                service.addNewClass(((Games)newObject), NameSpace.getText(),Integer.parseInt(ParameterSpace.getText()));
+                                service.addNewClass(((Games)newObject), NameSpace.getText(), ParameterSpace.getText());
                             }
 
                         } catch (InstantiationException e) {
