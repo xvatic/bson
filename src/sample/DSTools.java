@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DSTools extends {
+public class DSTools {
     public void writeBinaryForm(Document doc) throws IOException {
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("file.ser"));
-        stream.writeObject(doc);
         stream.writeObject(doc);
     }
 
@@ -64,7 +63,7 @@ public class DSTools extends {
         }
         return games;
     }
-    public boolean deleteGame(Games game){
+    public boolean deleteGame(Games game, AdditionalProcessing process){
         List<Games> games = getGames();
         int preSize = games.size();
 
