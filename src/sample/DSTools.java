@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DSTools {
+public class DSTools extends {
     public void writeBinaryForm(Document doc) throws IOException {
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("file.ser"));
         stream.writeObject(doc);
