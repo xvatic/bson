@@ -10,3 +10,4 @@
 {"Games": "MOBA", "name": "Lol", "additional": 200, "id": 10}
 {"Games": "MOBA", "name": "DotaAllStars", "additional": 150, "id": 9}
 {"Games": "BattleRoyale", "name": "Apex", "additional": "Twitch", "id": 11}
+{"Games": "MOBA", "name": "HoN", "additional": 300, "id": 12}

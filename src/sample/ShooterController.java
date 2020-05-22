@@ -57,6 +57,8 @@ public class ShooterController {
     public Button SwitchButton;
 
     public void work(){
+
+
         ReadyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -217,9 +217,9 @@ public class Service {
         return ser.setFightings(fighting);
     }
 
-    public List<Games> getAdditional(Games obj){
+    public List<Games> getAdditional(Games obj, AdditionalProcessing fun){
         DSTools ser = new DSTools();
-        return ser.getAdditional(obj);
+        return ser.getAdditional(obj, fun);
     }
 
     public boolean deleteAdditional(Games obj,int id){
@@ -228,7 +228,7 @@ public class Service {
         return ser.deleteGame(obj);
     }
 
-    public void changeAdditional(Games obj, int id, String name, Object parameter) throws IllegalAccessException {
+    public void changeAdditional(Games obj, int id, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
         DSTools ser = new DSTools();
         Collections.addAll(types, obj);
         deleteAdditional(obj, id);
@@ -255,13 +255,13 @@ public class Service {
             field.setAccessible(false);
 
         }
-        ser.setAdditional(obj);
+        ser.setAdditional(obj, fun);
 
     }
 
 
 
-    public void addNewClass(Games obj, String name, Object parameter) throws IllegalAccessException {
+    public void addNewClass(Games obj, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
         DSTools ser = new DSTools();
         Collections.addAll(types, obj);
         Field[] fields = obj.getClass().getDeclaredFields();
@@ -286,7 +286,7 @@ public class Service {
             field.setAccessible(false);
 
         }
-        ser.setAdditional(obj);
+        ser.setAdditional(obj, fun);
 
     }
 

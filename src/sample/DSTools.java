@@ -63,9 +63,10 @@ public class DSTools {
         }
         return games;
     }
-    public boolean deleteGame(Games game, AdditionalProcessing process){
+    public boolean deleteGame(Games game){
         List<Games> games = getGames();
         int preSize = games.size();
+
 
         Games deletedGame = null;
 
@@ -370,7 +371,7 @@ public class DSTools {
 
 
 
-    public List<Games> getAdditional(Games obj) {
+    public List<Games> getAdditional(Games obj, AdditionalProcessing processing) {
         Class addClass = obj.getClass();
         Field[] fields = obj.getClass().getDeclaredFields();
         List<Games> additional = new ArrayList<>();
@@ -419,13 +420,16 @@ public class DSTools {
         } catch (Exception e) {
             return null;
         }
-
+        boolean state = processing.get_proc(additional);
+        System.out.println(state);
         return additional;
     }
 
-    public boolean setAdditional(Games obj) {
+    public boolean setAdditional(Games obj, AdditionalProcessing processing) {
+        processing.del_proc();
         Object addVal1 = null;
         Object addVal2 = null;
+
         try(FileWriter writer = new FileWriter("games", true)) {
             Document doc = new Document();
             Field[] fields = obj.getClass().getDeclaredFields();

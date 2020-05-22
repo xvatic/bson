@@ -66,7 +66,9 @@ public class AdditionalController {
     @FXML
     public ToggleGroup BtnGroup;
 
-    public void work(){
+    public void work() {
+
+
 
         SwitchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -88,6 +90,7 @@ public class AdditionalController {
         });
 
 
+
         LoadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -96,6 +99,7 @@ public class AdditionalController {
                     String path = file.getPath();
                     Class additionalClass = LoadingEngine.start(path, file.getName());
                     Object newObject = null;
+
                     if(BtnGroup.getSelectedToggle() == AddButton){
                         try {
                             newObject = additionalClass.newInstance();
@@ -105,13 +109,18 @@ public class AdditionalController {
                              } catch (NumberFormatException ignore) {
 
                              }
-                            if (a != 0){
-                                service.addNewClass(((Games)newObject), NameSpace.getText(), a);
-                            }
-                            else{
-                                service.addNewClass(((Games)newObject), NameSpace.getText(), ParameterSpace.getText());
-                            }
+                            File filef = fileChooser.showOpenDialog(primaryStage);
+                            if (filef != null) {
+                                String pathf = file.getPath();
+                                Class additionalFun = LoadingEngine.start(pathf, filef.getName());
+                                Object newFun = additionalFun.newInstance();
 
+                                if (a != 0) {
+                                    service.addNewClass(((Games) newObject), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                } else {
+                                    service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),((AdditionalProcessing)newFun));
+                                }
+                            }
                         } catch (InstantiationException e) {
                             e.printStackTrace();
                         } catch (IllegalAccessException e) {
@@ -120,6 +129,7 @@ public class AdditionalController {
                     }
                     if(BtnGroup.getSelectedToggle() == ChangeButton){
                         try {
+
                             newObject = additionalClass.newInstance();
                             int a = 0;
                             try{
@@ -127,13 +137,17 @@ public class AdditionalController {
                             } catch (NumberFormatException ignore) {
 
                             }
-                            if (a != 0){
-                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a);
+                            File filef = fileChooser.showOpenDialog(primaryStage);
+                            if (filef != null) {
+                                String pathf = file.getPath();
+                                Class additionalFun = LoadingEngine.start(pathf, filef.getName());
+                                Object newFun = additionalFun.newInstance();
+                                if (a != 0) {
+                                    service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                } else {
+                                    service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), ((AdditionalProcessing)newFun));
+                                }
                             }
-                            else{
-                                service.changeAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(),ParameterSpace.getText());
-                            }
-
                         } catch (InstantiationException e) {
                             e.printStackTrace();
                         } catch (IllegalAccessException e) {
@@ -152,7 +166,7 @@ public class AdditionalController {
                         }
                     }
                     if(BtnGroup.getSelectedToggle() == ReadyButton){
-
+                        List<Games> games = null;
                         ObjectComboBox.valueProperty().set(null);
                         ObservableList<String> additional = FXCollections.observableArrayList();
                         try {
@@ -162,7 +176,20 @@ public class AdditionalController {
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         }
-                        List<Games> games = service.getAdditional(((Games)newObject));
+                        File filef = fileChooser.showOpenDialog(primaryStage);
+                        if (filef != null) {
+                            String pathf = file.getPath();
+                            Class additionalFun = LoadingEngine.start(pathf, filef.getName());
+                            try {
+                                Object newFun = additionalFun.newInstance();
+                                games = service.getAdditional(((Games)newObject),((AdditionalProcessing)newFun));
+                            } catch (InstantiationException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                         for (Games game : games){
                             Field[] fields = game.getClass().getDeclaredFields();
                             int i=1;
