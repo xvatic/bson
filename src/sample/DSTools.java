@@ -2,8 +2,13 @@ package sample;
 
 import org.bson.Document;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -371,7 +376,7 @@ public class DSTools {
 
 
 
-    public List<Games> getAdditional(Games obj, AdditionalProcessing processing) {
+    public List<Games> getAdditional(Games obj, AdditionalProcessing processing) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException {
         Class addClass = obj.getClass();
         Field[] fields = obj.getClass().getDeclaredFields();
         List<Games> additional = new ArrayList<>();

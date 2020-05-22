@@ -14,9 +14,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,7 +40,8 @@ public class AdditionalController {
     @FXML
     public ComboBox ObjectComboBox;
 
-
+    @FXML
+    public  CheckBox checkexternal;
 
     @FXML
     public TextField NameSpace;
@@ -113,13 +119,25 @@ public class AdditionalController {
                             if (filef != null) {
                                 String pathf = file.getPath();
                                 Class additionalFun = LoadingEngine.start(pathf, filef.getName());
-                                Object newFun = additionalFun.newInstance();
 
-                                if (a != 0) {
-                                    service.addNewClass(((Games) newObject), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
-                                } else {
-                                    service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),((AdditionalProcessing)newFun));
+                                if(checkexternal.isSelected()){
+                                    Object newFun = additionalFun.newInstance();
+                                    ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
+                                    if (a != 0) {
+                                        service.addNewClass(((Games) newObject), NameSpace.getText(), a, adapter);
+                                    } else {
+                                        service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),adapter);
+                                    }
                                 }
+                                else {
+                                    Object newFun = additionalFun.newInstance();
+                                    if (a != 0) {
+                                        service.addNewClass(((Games) newObject), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                    } else {
+                                        service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),((AdditionalProcessing)newFun));
+                                    }
+                                }
+
                             }
                         } catch (InstantiationException e) {
                             e.printStackTrace();
@@ -141,12 +159,26 @@ public class AdditionalController {
                             if (filef != null) {
                                 String pathf = file.getPath();
                                 Class additionalFun = LoadingEngine.start(pathf, filef.getName());
-                                Object newFun = additionalFun.newInstance();
-                                if (a != 0) {
-                                    service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
-                                } else {
-                                    service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), ((AdditionalProcessing)newFun));
+                                if(checkexternal.isSelected()){
+                                    Object newFun = additionalFun.newInstance();
+                                    ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
+                                    if (a != 0) {
+                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, adapter);
+                                    } else {
+                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), adapter);
+                                    }
                                 }
+                                else {
+                                    Object newFun = additionalFun.newInstance();
+                                    if (a != 0) {
+                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                    } else {
+                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), ((AdditionalProcessing)newFun));
+                                    }
+                                }
+
+
+
                             }
                         } catch (InstantiationException e) {
                             e.printStackTrace();
@@ -181,11 +213,29 @@ public class AdditionalController {
                             String pathf = file.getPath();
                             Class additionalFun = LoadingEngine.start(pathf, filef.getName());
                             try {
-                                Object newFun = additionalFun.newInstance();
-                                games = service.getAdditional(((Games)newObject),((AdditionalProcessing)newFun));
+                                if(checkexternal.isSelected()){
+                                    Object newFun = additionalFun.newInstance();
+                                    ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
+                                    games = service.getAdditional(((Games)newObject),adapter);
+                                }
+                                else {
+                                    Object newFun = additionalFun.newInstance();
+                                    games = service.getAdditional(((Games)newObject),((AdditionalProcessing)newFun));
+                                }
+
                             } catch (InstantiationException e) {
                                 e.printStackTrace();
                             } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (NoSuchAlgorithmException e) {
+                                e.printStackTrace();
+                            } catch (NoSuchPaddingException e) {
+                                e.printStackTrace();
+                            } catch (BadPaddingException e) {
+                                e.printStackTrace();
+                            } catch (IllegalBlockSizeException e) {
+                                e.printStackTrace();
+                            } catch (InvalidKeyException e) {
                                 e.printStackTrace();
                             }
                         }

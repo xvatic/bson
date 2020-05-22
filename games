@@ -11,3 +11,4 @@
 {"Games": "MOBA", "name": "DotaAllStars", "additional": 150, "id": 9}
 {"Games": "BattleRoyale", "name": "Apex", "additional": "Twitch", "id": 11}
 {"Games": "MOBA", "name": "HoN", "additional": 300, "id": 12}
+{"Games": "BattleRoyale", "name": "PUBG", "additional": "youtube", "id": 13}

@@ -4,9 +4,14 @@ import com.sun.tools.classfile.ConstantPool;
 import org.bson.Document;
 
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -217,7 +222,7 @@ public class Service {
         return ser.setFightings(fighting);
     }
 
-    public List<Games> getAdditional(Games obj, AdditionalProcessing fun){
+    public List<Games> getAdditional(Games obj, AdditionalProcessing fun) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         DSTools ser = new DSTools();
         return ser.getAdditional(obj, fun);
     }
