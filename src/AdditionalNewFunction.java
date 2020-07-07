@@ -15,7 +15,7 @@ public class AdditionalNewFunction implements AdditionalExternalProcessing {
 
 
     @Override
-    public double del_processing(String path) {
+       public double del_processing(String path) {
         File file = new File(path);
         double bytes = file.length();
         double kilobytes = (bytes/1024);

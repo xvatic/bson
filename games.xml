@@ -27,5 +27,57 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="MOBA">
+    <void property="heroes">
+     <int>300</int>
+    </void>
+    <void property="id">
+     <int>12</int>
+    </void>
+    <void property="name">
+     <string>HoN</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="MOBA">
+    <void property="heroes">
+     <int>123</int>
+    </void>
+    <void property="id">
+     <int>14</int>
+    </void>
+    <void property="name">
+     <string>Strife</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="MOBA">
+    <void property="heroes">
+     <int>200</int>
+    </void>
+    <void property="id">
+     <int>15</int>
+    </void>
+    <void property="name">
+     <string>HOTS</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="MOBA">
+    <void property="heroes">
+     <int>350</int>
+    </void>
+    <void property="id">
+     <int>20</int>
+    </void>
+    <void property="name">
+     <string>HOTS</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>
