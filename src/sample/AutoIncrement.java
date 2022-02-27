@@ -5,8 +5,8 @@ import java.util.List;
 public class AutoIncrement {
 
     public int autoIncrement() {
-        DSTools ser = new DSTools();
-        List<Games> games = ser.getGames();
+        SerializingTools ser = new SerializingTools();
+        List<Game> games = ser.getGames();
 
         int max = 0;
 
@@ -14,7 +14,7 @@ public class AutoIncrement {
             return getUnUsedId(games);
         }
 
-        for (Games game : games) {
+        for (Game game : games) {
             if (game.getId() > max) {
                 max = game.getId();
             }
@@ -23,7 +23,7 @@ public class AutoIncrement {
         return ++max;
     }
 
-    private int getUnUsedId(List<Games> games) {
+    private int getUnUsedId(List<Game> games) {
         int unUsedId = 0;
 
         boolean flag = true;
@@ -48,7 +48,7 @@ public class AutoIncrement {
         }
 
         int count = 0;
-        for (Games game : games) {
+        for (Game game : games) {
             if (game.getId() == unUsedId) {
                 count++;
             }

@@ -1,33 +1,29 @@
 package sample;
 
-import com.sun.tools.classfile.ConstantPool;
 import org.bson.Document;
 
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
-public class Service {
-    private static List<Games> types = new ArrayList<Games>();
+public class ObjectEditingService {
+    private static List<Game> types = new ArrayList<Game>();
     public Document getLatestAddedShape(){
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getLatestAddedGame();
     }
 
 
-    public boolean delete(Games game) {
-        DSTools ser = new DSTools();
+    public boolean delete(Game game) {
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (idCheck.uniqueId(game)) {
@@ -38,12 +34,12 @@ public class Service {
     }
 
     public List<Shooter> getShooter(){
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getShooters();
     }
 
     public boolean setShooter(Shooter shooter) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (shooter.getId() < 0 || shooter.getName() == null) {
@@ -58,7 +54,7 @@ public class Service {
     }
 
     public boolean changeShooter(Shooter shooter){
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (shooter.getId() < 0 || shooter.getName() == null) {
@@ -75,13 +71,13 @@ public class Service {
 
 
     public List<Racing> getRacing() {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getRacings();
     }
 
 
     public boolean setRacing(Racing racing) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (racing.getId() < 0 || racing.getName() == null || racing.getCarsAmount() <= 0) {
@@ -97,7 +93,7 @@ public class Service {
 
 
     public boolean changeRacing(Racing racing) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (racing.getId() < 0 || racing.getName() == null || racing.getCarsAmount() <= 0) {
@@ -112,13 +108,13 @@ public class Service {
     }
 
     public List<Indie> getIndie() {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getIndies();
     }
 
 
     public boolean setIndie(Indie indie) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (indie.getId() < 0 || indie.getName() == null || indie.getLevel() == null) {
@@ -134,7 +130,7 @@ public class Service {
 
 
     public boolean changeIndie(Indie indie) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (indie.getId() < 0 || indie.getName() == null || indie.getLevel() == null) {
@@ -149,13 +145,13 @@ public class Service {
     }
 
     public List<Stealth> getStealth() {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getStealthes();
     }
 
 
     public boolean setStealth(Stealth stealth) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (stealth.getId() < 0 || stealth.getName() == null || stealth.getHero() == null) {
@@ -171,7 +167,7 @@ public class Service {
 
 
     public boolean changeStealth(Stealth stealth) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (stealth.getId() < 0 || stealth.getName() == null || stealth.getHero() == null) {
@@ -186,13 +182,13 @@ public class Service {
     }
 
     public List<Fighting> getFighting() {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         return ser.getFightings();
     }
 
 
     public boolean setFighting(Fighting fighting) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (fighting.getId() < 0 || fighting.getName() == null || fighting.getPrizePool() <= 0) {
@@ -208,7 +204,7 @@ public class Service {
 
 
     public boolean changeFighting(Fighting fighting) {
-        DSTools ser = new DSTools();
+        SerializingTools ser = new SerializingTools();
         IdCheck idCheck = new IdCheck();
 
         if (fighting.getId() < 0 || fighting.getName() == null || fighting.getPrizePool() <= 0) {
@@ -222,19 +218,19 @@ public class Service {
         return ser.setFightings(fighting);
     }
 
-    public List<Games> getAdditional(Games obj, AdditionalProcessing fun) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        DSTools ser = new DSTools();
+    public List<Game> getAdditional(Game obj, AdditionalProcessing fun) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+        SerializingTools ser = new SerializingTools();
         return ser.getAdditional(obj, fun);
     }
 
-    public boolean deleteAdditional(Games obj,int id){
-        DSTools ser = new DSTools();
+    public boolean deleteAdditional(Game obj, int id){
+        SerializingTools ser = new SerializingTools();
         obj.setId(id);
         return ser.deleteGame(obj);
     }
 
-    public void changeAdditional(Games obj, int id, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
-        DSTools ser = new DSTools();
+    public void changeAdditional(Game obj, int id, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
+        SerializingTools ser = new SerializingTools();
         Collections.addAll(types, obj);
         deleteAdditional(obj, id);
         obj.setId(id);
@@ -265,9 +261,8 @@ public class Service {
     }
 
 
-
-    public void addNewClass(Games obj, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
-        DSTools ser = new DSTools();
+    public void addNewClass(Game obj, String name, Object parameter, AdditionalProcessing fun) throws IllegalAccessException {
+        SerializingTools ser = new SerializingTools();
         Collections.addAll(types, obj);
         Field[] fields = obj.getClass().getDeclaredFields();
         int i=1;
@@ -294,7 +289,5 @@ public class Service {
         ser.setAdditional(obj, fun);
 
     }
-
-
 
 }

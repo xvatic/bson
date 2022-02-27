@@ -6,20 +6,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import org.bson.*;
-import java.io.*;
-import java.net.ServerSocket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
-import org.bson.BsonDocument;
-import org.bson.codecs.RawBsonDocumentCodec;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import java.util.Scanner;
 
 
 public class Main extends Application {
@@ -33,7 +22,7 @@ public class Main extends Application {
     }
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
-    private static Service service = new Service();
+    private static ObjectEditingService service = new ObjectEditingService();
 
     public static void main(String[] args) {
 

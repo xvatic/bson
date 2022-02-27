@@ -1,9 +1,9 @@
 import sample.AutoIncrement;
-import sample.Games;
+import sample.Game;
 
 import java.util.Objects;
 
-public class BattleRoyale extends Games {
+public class BattleRoyale extends Game {
     private static AutoIncrement autoIncrement = new AutoIncrement();
     @Deprecated
     private String name;

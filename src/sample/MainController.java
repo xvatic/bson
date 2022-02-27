@@ -15,34 +15,28 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.LoadingEngine;
 
 
-import javax.swing.*;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
-public class Controller {
+public class MainController {
 
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
-    private static Service service = new Service();
+    private static ObjectEditingService service = new ObjectEditingService();
     final FileChooser fileChooser = new FileChooser();
-
 
     ObservableList<String> types = FXCollections.observableArrayList("Shooter","Indie","Racing", "Fighting", "Stealth");
 
     @FXML
     public Button ReadyButton;
 
-
     @FXML
     public ComboBox ObjectComboBox;
 
     @FXML
     public ComboBox TypeComboBox;
-
 
     @FXML
     public TextField NameSpace;
@@ -64,8 +58,10 @@ public class Controller {
 
     @FXML
     public Button ChangeButton;
+
     @FXML
     public Button SwitchButton;
+
     @FXML
     public Button LoadButton;
 
@@ -168,6 +164,7 @@ public class Controller {
 
             }
         });
+
         LoadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -184,22 +181,10 @@ public class Controller {
                 stage.setTitle("Additional");
                 stage.setScene(new Scene(root1));
                 stage.show();
-
-
-
-
             }
         });
 
     }
-
-
-
-
-
-
-
-
 
     @FXML
     void initialize() {

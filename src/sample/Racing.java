@@ -2,7 +2,7 @@ package sample;
 
 import java.util.Objects;
 
-public class Racing extends Games{
+public class Racing extends Game {
     private String name;
     private int carsAmount;
 

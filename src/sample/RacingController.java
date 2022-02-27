@@ -23,19 +23,13 @@ public class RacingController {
 
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
-    private static Service service = new Service();
-
-
-
+    private static ObjectEditingService service = new ObjectEditingService();
 
     @FXML
     public Button ReadyButton;
 
-
     @FXML
     public ComboBox ObjectComboBox;
-
-
 
     @FXML
     public TextField NameSpace;

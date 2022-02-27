@@ -1,10 +1,9 @@
 import sample.AutoIncrement;
-import sample.ExternalAnnotation;
-import sample.Games;
+import sample.Game;
 
 import java.util.Objects;
 
-public class MOBA extends Games {
+public class MOBA extends Game {
     private static AutoIncrement autoIncrement = new AutoIncrement();
     @Deprecated
     private String name;

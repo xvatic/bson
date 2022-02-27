@@ -12,12 +12,12 @@
       <ComboBox fx:id="ObjectComboBox" layoutX="421.0" layoutY="97.0" prefWidth="150.0" />
       <TextField fx:id="NameSpace" layoutX="88.0" layoutY="135.0" />
       <TextField fx:id="IdSpace" layoutX="88.0" layoutY="210.0" />
-      <Label layoutX="88.0" layoutY="93.0" prefHeight="17.0" prefWidth="80.0" text="Имя" />
+      <Label layoutX="88.0" layoutY="93.0" prefHeight="17.0" prefWidth="80.0" text="Name" />
       <Label layoutX="88.0" layoutY="180.0" prefHeight="17.0" prefWidth="80.0" text="Id" />
-      <Button fx:id="ReadyButton" layoutX="421.0" layoutY="253.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Готово" />
-      <Button fx:id="AddButton" layoutX="29.0" layoutY="358.0" mnemonicParsing="false" text="Добавить" />
-      <Button fx:id="ChangeButton" layoutX="217.0" layoutY="358.0" mnemonicParsing="false" text="Отредактировать" />
-      <Button fx:id="DeleteButton" layoutX="128.0" layoutY="358.0" mnemonicParsing="false" text="Удалить" />
-      <Button fx:id="SwitchButton" layoutX="78.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Назад" />
+      <Button fx:id="ReadyButton" layoutX="421.0" layoutY="253.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Done" />
+      <Button fx:id="AddButton" layoutX="29.0" layoutY="358.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="ChangeButton" layoutX="217.0" layoutY="358.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="DeleteButton" layoutX="128.0" layoutY="358.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="SwitchButton" layoutX="78.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Back" />
    </children>
 </AnchorPane>

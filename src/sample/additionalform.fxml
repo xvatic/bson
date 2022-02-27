@@ -15,19 +15,19 @@
         <TextField fx:id="NameSpace" layoutX="88.0" layoutY="135.0" />
         <TextField fx:id="IdSpace" layoutX="88.0" layoutY="210.0" />
         <TextField fx:id="ParameterSpace" layoutX="88.0" layoutY="286.0" />
-        <Label layoutX="88.0" layoutY="93.0" prefHeight="17.0" prefWidth="80.0" text="Имя" />
+        <Label layoutX="88.0" layoutY="93.0" prefHeight="17.0" prefWidth="80.0" text="Name" />
         <Label layoutX="88.0" layoutY="180.0" prefHeight="17.0" prefWidth="80.0" text="Id" />
-        <Label fx:id="ParameterLabel" layoutX="88.0" layoutY="249.0" prefHeight="17.0" prefWidth="80.0" text="Поле" />
-        <Button fx:id="SwitchButton" layoutX="78.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Назад" />
+        <Label fx:id="ParameterLabel" layoutX="88.0" layoutY="249.0" prefHeight="17.0" prefWidth="80.0" text="Parameter" />
+        <Button fx:id="SwitchButton" layoutX="78.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Back" />
       <Button fx:id="LoadButton" layoutX="217.0" layoutY="29.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Load" />
-      <RadioButton fx:id="AddButton" layoutX="442.0" layoutY="210.0" mnemonicParsing="false" text="Добавить">
+      <RadioButton fx:id="AddButton" layoutX="442.0" layoutY="210.0" mnemonicParsing="false" text="Add">
          <toggleGroup>
             <ToggleGroup fx:id="BtnGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="DeleteButton" layoutX="442.0" layoutY="250.0" mnemonicParsing="false" text="Удалить" toggleGroup="$BtnGroup" />
-      <RadioButton fx:id="ChangeButton" layoutX="442.0" layoutY="285.0" mnemonicParsing="false" text="Изменить" toggleGroup="$BtnGroup" />
-      <RadioButton fx:id="ReadyButton" layoutX="442.0" layoutY="319.0" mnemonicParsing="false" text="Показать" toggleGroup="$BtnGroup" />
-      <CheckBox fx:id="checkexternal" layoutX="421.0" layoutY="153.0" mnemonicParsing="false" text="Чужой класс" />
+      <RadioButton fx:id="DeleteButton" layoutX="442.0" layoutY="250.0" mnemonicParsing="false" text="Delete" toggleGroup="$BtnGroup" />
+      <RadioButton fx:id="ChangeButton" layoutX="442.0" layoutY="285.0" mnemonicParsing="false" text="Edit" toggleGroup="$BtnGroup" />
+      <RadioButton fx:id="ReadyButton" layoutX="442.0" layoutY="319.0" mnemonicParsing="false" text="Show" toggleGroup="$BtnGroup" />
+      <CheckBox fx:id="CheckBoxExternal" layoutX="421.0" layoutY="153.0" mnemonicParsing="false" text="External class" />
     </children>
 </AnchorPane>

@@ -23,7 +23,7 @@ public class FightingController {
 
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
-    private static Service service = new Service();
+    private static ObjectEditingService service = new ObjectEditingService();
 
 
     ObservableList<String> types = FXCollections.observableArrayList("Shooter","Indie","Racing", "Fighting", "Stealth");

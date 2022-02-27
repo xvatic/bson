@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +27,7 @@ import java.util.Scanner;
 public class AdditionalController {
     private static Scanner scanner = new Scanner(System.in);
     private static AutoIncrement autoIncrement = new AutoIncrement();
-    private static Service service = new Service();
+    private static ObjectEditingService service = new ObjectEditingService();
     private Stage primaryStage;
     private LoadingEngine engine;
     final FileChooser fileChooser = new FileChooser();
@@ -41,7 +40,7 @@ public class AdditionalController {
     public ComboBox ObjectComboBox;
 
     @FXML
-    public  CheckBox checkexternal;
+    public CheckBox CheckBoxExternal;
 
     @FXML
     public TextField NameSpace;
@@ -74,8 +73,6 @@ public class AdditionalController {
 
     public void work() {
 
-
-
         SwitchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -94,7 +91,6 @@ public class AdditionalController {
                 stage.show();
             }
         });
-
 
 
         LoadButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -120,21 +116,21 @@ public class AdditionalController {
                                 String pathf = file.getPath();
                                 Class additionalFun = LoadingEngine.start(pathf, filef.getName());
 
-                                if(checkexternal.isSelected()){
+                                if(CheckBoxExternal.isSelected()){
                                     Object newFun = additionalFun.newInstance();
                                     ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
                                     if (a != 0) {
-                                        service.addNewClass(((Games) newObject), NameSpace.getText(), a, adapter);
+                                        service.addNewClass(((Game) newObject), NameSpace.getText(), a, adapter);
                                     } else {
-                                        service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),adapter);
+                                        service.addNewClass(((Game) newObject), NameSpace.getText(), ParameterSpace.getText(),adapter);
                                     }
                                 }
                                 else {
                                     Object newFun = additionalFun.newInstance();
                                     if (a != 0) {
-                                        service.addNewClass(((Games) newObject), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                        service.addNewClass(((Game) newObject), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
                                     } else {
-                                        service.addNewClass(((Games) newObject), NameSpace.getText(), ParameterSpace.getText(),((AdditionalProcessing)newFun));
+                                        service.addNewClass(((Game) newObject), NameSpace.getText(), ParameterSpace.getText(),((AdditionalProcessing)newFun));
                                     }
                                 }
 
@@ -159,21 +155,21 @@ public class AdditionalController {
                             if (filef != null) {
                                 String pathf = file.getPath();
                                 Class additionalFun = LoadingEngine.start(pathf, filef.getName());
-                                if(checkexternal.isSelected()){
+                                if(CheckBoxExternal.isSelected()){
                                     Object newFun = additionalFun.newInstance();
                                     ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
                                     if (a != 0) {
-                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, adapter);
+                                        service.changeAdditional(((Game) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, adapter);
                                     } else {
-                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), adapter);
+                                        service.changeAdditional(((Game) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), adapter);
                                     }
                                 }
                                 else {
                                     Object newFun = additionalFun.newInstance();
                                     if (a != 0) {
-                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
+                                        service.changeAdditional(((Game) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), a, ((AdditionalProcessing)newFun));
                                     } else {
-                                        service.changeAdditional(((Games) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), ((AdditionalProcessing)newFun));
+                                        service.changeAdditional(((Game) newObject), Integer.parseInt(IdSpace.getText()), NameSpace.getText(), ParameterSpace.getText(), ((AdditionalProcessing)newFun));
                                     }
                                 }
 
@@ -189,7 +185,7 @@ public class AdditionalController {
                     if(BtnGroup.getSelectedToggle() == DeleteButton){
                         try {
                             newObject = additionalClass.newInstance();
-                            service.deleteAdditional(((Games)newObject), Integer.parseInt(IdSpace.getText()));
+                            service.deleteAdditional(((Game)newObject), Integer.parseInt(IdSpace.getText()));
 
                         } catch (InstantiationException e) {
                             e.printStackTrace();
@@ -198,7 +194,7 @@ public class AdditionalController {
                         }
                     }
                     if(BtnGroup.getSelectedToggle() == ReadyButton){
-                        List<Games> games = null;
+                        List<Game> games = null;
                         ObjectComboBox.valueProperty().set(null);
                         ObservableList<String> additional = FXCollections.observableArrayList();
                         try {
@@ -213,14 +209,14 @@ public class AdditionalController {
                             String pathf = file.getPath();
                             Class additionalFun = LoadingEngine.start(pathf, filef.getName());
                             try {
-                                if(checkexternal.isSelected()){
+                                if(CheckBoxExternal.isSelected()){
                                     Object newFun = additionalFun.newInstance();
                                     ExternalAdapter adapter = new ExternalAdapter((AdditionalExternalProcessing)newFun);
-                                    games = service.getAdditional(((Games)newObject),adapter);
+                                    games = service.getAdditional(((Game)newObject),adapter);
                                 }
                                 else {
                                     Object newFun = additionalFun.newInstance();
-                                    games = service.getAdditional(((Games)newObject),((AdditionalProcessing)newFun));
+                                    games = service.getAdditional(((Game)newObject),((AdditionalProcessing)newFun));
                                 }
 
                             } catch (InstantiationException e) {
@@ -240,7 +236,7 @@ public class AdditionalController {
                             }
                         }
 
-                        for (Games game : games){
+                        for (Game game : games){
                             Field[] fields = game.getClass().getDeclaredFields();
                             int i=1;
                             for(Field field: fields){

@@ -1,12 +1,11 @@
 import sample.AdditionalProcessing;
-import sample.Games;
+import sample.Game;
 
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -32,7 +31,7 @@ public class AdditionalFunction implements AdditionalProcessing {
 
     }
 
-    public boolean get_proc(List<Games> list) {
+    public boolean get_proc(List<Game> list) {
         boolean state = false;
         XMLEncoder encoder = null;
         final String PATH = "games.xml";

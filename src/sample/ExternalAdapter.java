@@ -1,6 +1,6 @@
 package sample;
 
-import com.sun.deploy.util.StringUtils;
+
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -24,7 +24,7 @@ public class ExternalAdapter implements AdditionalProcessing {
     }
 
     @Override
-    public boolean get_proc(List<Games> list) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+    public boolean get_proc(List<Game> list) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         int i =0;
         String delim = "|";
         StringBuilder sb = new StringBuilder();

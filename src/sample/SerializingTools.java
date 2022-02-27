@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DSTools {
+public class SerializingTools {
     public void writeBinaryForm(Document doc) throws IOException {
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("file.ser"));
         stream.writeObject(doc);
     }
-
 
     public List<Document> getAll(){
         List<Document> games = new ArrayList<>();
@@ -42,8 +41,8 @@ public class DSTools {
         }
         return games;
     }
-    public List<Games> getGames(){
-        List<Games> games = new ArrayList<>();
+    public List<Game> getGames(){
+        List<Game> games = new ArrayList<>();
         Scanner sc = null;
         try{
             File file = new File("games");
@@ -53,7 +52,7 @@ public class DSTools {
                 String line = sc.nextLine().trim();
                 if (!line.isEmpty()) {
                     Document doc = Document.parse(line);
-                    Games game = new Games((int) doc.get("id"));
+                    Game game = new Game((int) doc.get("id"));
                     games.add(game);
 
                 }
@@ -68,12 +67,12 @@ public class DSTools {
         }
         return games;
     }
-    public boolean deleteGame(Games game){
-        List<Games> games = getGames();
+    public boolean deleteGame(Game game){
+        List<Game> games = getGames();
         int preSize = games.size();
 
 
-        Games deletedGame = null;
+        Game deletedGame = null;
 
         for (int i = 0; i < games.size(); i++) {
             if (games.get(i).getId() == game.getId()) {
@@ -376,10 +375,10 @@ public class DSTools {
 
 
 
-    public List<Games> getAdditional(Games obj, AdditionalProcessing processing) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException {
+    public List<Game> getAdditional(Game obj, AdditionalProcessing processing) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException {
         Class addClass = obj.getClass();
         Field[] fields = obj.getClass().getDeclaredFields();
-        List<Games> additional = new ArrayList<>();
+        List<Game> additional = new ArrayList<>();
 
 
         File file = new File("games");
@@ -395,7 +394,7 @@ public class DSTools {
 
                         /*Fighting fighting = new Fighting((int) doc.get("id"), (String) doc.get("name"),
                                 (int) doc.get("prizePool"));*/
-                       ((Games) addObj).setId((int) doc.get("id"));
+                       ((Game) addObj).setId((int) doc.get("id"));
                        int i = 1;
                        for(Field field: fields) {
                            java.lang.annotation.Annotation annotation = field.getAnnotation(Deprecated.class);
@@ -417,7 +416,7 @@ public class DSTools {
 
                        }
 
-                        additional.add((Games) addObj);
+                        additional.add((Game) addObj);
                     }
 
                 }
@@ -430,7 +429,7 @@ public class DSTools {
         return additional;
     }
 
-    public boolean setAdditional(Games obj, AdditionalProcessing processing) {
+    public boolean setAdditional(Game obj, AdditionalProcessing processing) {
         processing.del_proc();
         Object addVal1 = null;
         Object addVal2 = null;

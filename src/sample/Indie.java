@@ -2,7 +2,7 @@ package sample;
 
 import java.util.Objects;
 
-public class Indie extends Games{
+public class Indie extends Game {
     private String name;
     private String level;
 
